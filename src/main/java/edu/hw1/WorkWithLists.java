@@ -18,7 +18,11 @@ public final class WorkWithLists {
 
     //Мой вариант, остальные не вижу смысла делать,
     // все есть в интернете и особого смысла переизобретать сортировки - нет.
-    public static void mergeSort(List<Double> list, int first, int last) {
+    public static void sort(List<Double> list) {
+        mergeSort(list, 0, list.size() - 1);
+    }
+
+    private static void mergeSort(List<Double> list, int first, int last) {
         if (last <= first) {
             return;
         }

@@ -3,7 +3,9 @@ package edu.hw1.streamAPI;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -73,5 +75,12 @@ public class StreamAPITest {
         Boolean result = StreamAPI.containsEmployeeOverNSalary(EMPLOYEES);
 
         assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Проверка выброса исключения при невозможности нахождения среднего")
+    void testThatAverageSalaryByDepartmentThrowsException() {
+        assertThrowsExactly(NoSuchElementException.class,
+                () -> StreamAPI.averageSalaryByDepartment(new ArrayList<>(), "HR"));
     }
 }

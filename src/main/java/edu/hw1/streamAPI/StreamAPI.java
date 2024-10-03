@@ -3,6 +3,7 @@ package edu.hw1.streamAPI;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public final class StreamAPI {
@@ -26,7 +27,7 @@ public final class StreamAPI {
     public static Double averageSalaryByDepartment(List<Employee> list, String department) {
         return list.stream().filter(employee -> employee.getDepartment().equals(department))
                 .mapToDouble(Employee::getSalary)
-                .average().orElse(-1.0);
+                .average().orElseThrow(NoSuchElementException::new);
     }
 
     public static List<Employee> employeesOldestThirty(List<Employee> list) {
@@ -35,8 +36,7 @@ public final class StreamAPI {
 
     public static List<Employee> sortBySalary(List<Employee> employees) {
         List<Employee> list = new ArrayList<>(employees);
-        list.sort(Comparator.comparing(Employee::getSalary));
-        return list;
+        return list.stream().sorted(Comparator.comparing(Employee::getSalary)).toList();
     }
 
     public static List<String> toStringNameDepartment(List<Employee> employees) {
@@ -46,6 +46,6 @@ public final class StreamAPI {
     }
 
     public static Boolean containsEmployeeOverNSalary(List<Employee> list) {
-        return list.stream().anyMatch(e -> e.getSalary() > 100_100.00);
+        return list.stream().anyMatch(e -> e.getSalary() > 100_000.00);
     }
 }

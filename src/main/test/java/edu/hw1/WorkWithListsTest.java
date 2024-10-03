@@ -27,7 +27,7 @@ public class WorkWithListsTest {
     void testThatListCorrectlySortedReturnedSucceed() {
         List<Double> testList = new ArrayList<>(Arrays.asList(3.1, 2.5, 123.1, 0.0, 1.1));
 
-        WorkWithLists.mergeSort(testList, 0, testList.size() - 1);
+        WorkWithLists.sort(testList);
         final var EXPECTED_LIST = List.of(0.0, 1.1, 2.5, 3.1, 123.1);
         assertEquals(EXPECTED_LIST, testList);
     }

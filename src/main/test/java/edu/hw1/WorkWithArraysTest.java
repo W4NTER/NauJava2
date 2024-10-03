@@ -4,10 +4,14 @@ package edu.hw1;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 public class WorkWithArraysTest {
     private final static int[] GIVEN_ARRAY = {1, 2, -189, 3, 2};
+    private final static int[] EMPTY_ARRAY = {};
 
     @Test
     @DisplayName("Проверка нахождения максимального элемента по модулю в массиве")
@@ -53,5 +57,19 @@ public class WorkWithArraysTest {
 
         final int EXPECTED_VALUE = 8;
         assertEquals(EXPECTED_VALUE, result);
+    }
+
+    @Test
+    @DisplayName("Проверка выброса исключения при поиске макс значения в пустом массиве")
+    void testThatGetMaxElOfArrayThrowsException() {
+        assertThrowsExactly(NoSuchElementException.class,
+                () -> WorkWithArrays.getMaxAbsValueOfArray(EMPTY_ARRAY));
+    }
+
+    @Test
+    @DisplayName("Проверка выброса исключения при поиске мин значения в пустом массиве")
+    void testThatGetMinElOfArrayThrowsException() {
+        assertThrowsExactly(NoSuchElementException.class,
+                () -> WorkWithArrays.getMinValueOfArray(EMPTY_ARRAY));
     }
 }
